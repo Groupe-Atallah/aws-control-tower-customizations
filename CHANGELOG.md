@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2022-06-08
+- Add support for CfCT pipeline to fail if any stack instances within a stack set deployment have failed
+  - New template parameter `EnforceSuccessfulStackInstances` can be set to True to achieve this behaviour
+  - Previously, when customers set high fault tolerance values to get concurrent stack instance deployments, the CfCT pipeline would succeed even when stack instances failed, which caused cascading failures for customer workflow dependencies
+- Bug-Fix: Add non-interactive flag to dpkg-reconfigure to support non-US-ACSII characters in template [#121](https://github.com/aws-solutions/aws-control-tower-customizations/issues/121)
+
+## [2.3.1] - 2022-05-18
+- Reduce CodeBuild runtime by removing unnecessary apt-get upgrade and apt-mark hold commands
+- Update CodeBuild container image to aws/codebuild/standard:5.0. This should reduce CodeBuild queued and provisioning stage wait times.
+- Fix bug related to Service Control Policy (SCP) deployment in organizations with >100 SCPs
+
+## [2.3.0] - 2022-04-20
+- Pinned version for MarkupSafe dependency to 2.0.1 due to https://github.com/pallets/jinja/issues/1585
+- Pinned version of Amazon Corretto to java-1.8.0-amazon-corretto-jdk due to https://github.com/aws-solutions/aws-control-tower-customizations/issues/102
+- Moved python code into its own package
+- Building the solution from source now requires Python 3.6 or higher
+- Customers should now download the [Customizations for AWS Control Tower CloudFormation Template](https://github.com/aws-solutions/aws-control-tower-customizations/blob/main/customizations-for-aws-control-tower.template) from GitHub instead of S3
+
 ## [2.2.0] - 2021-12-09
 ### Added 
 - Added support for organization Root as an OU for manifest schema version "2021-03-15". [#8](https://github.com/aws-solutions/aws-control-tower-customizations/pull/8)
